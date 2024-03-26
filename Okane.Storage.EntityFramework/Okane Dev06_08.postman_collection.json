@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "5698182f-7335-4bd3-bd58-e83b66eb2b67",
+		"name": "Okane Dev06_08",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2402593"
+	},
+	"item": [
+		{
+			"name": "Swagger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5177/swagger/v1/swagger.json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"swagger",
+						"v1",
+						"swagger.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Expense",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.environment.set(\"createdExpenseId\", pm.response.json().id);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var categories = ['Food', 'Entertainment', 'Taxes'];",
+							"",
+							"pm.environment.set('Category', categories[Math.floor(Math.random() * categories.length)]);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Amount\": 15,\n    \"CategoryName\": \"{{Category}}\",\n    \"Description\": \"My Description\",\n    \"InvoiceUrl\": \"http://invoices.com/2342\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5177/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Expense",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.environment.set(\"createdExpenseId\", pm.response.json().id);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Amount\": 100,\n    \"CategoryName\": \"Food\",\n    \"Description\": \"My Description\",\n    \"InvoiceUrl\": \"http://invoice.com/123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5177/expenses/{{createdExpenseId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses",
+						"{{createdExpenseId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Expense - Invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Category\": \"Something veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeery long\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5177/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve All Expenses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5177/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve by Category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5177/expenses?category=Entertainment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Entertainment"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5177/expenses/{{createdExpenseId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses",
+						"{{createdExpenseId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "By Id - Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5177/expenses/-50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses",
+						"-50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Expense",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.environment.set(\"createdExpenseId\", pm.response.json().id);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5177/expenses/{{createdExpenseId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5177",
+					"path": [
+						"expenses",
+						"{{createdExpenseId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

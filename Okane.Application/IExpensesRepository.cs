@@ -5,7 +5,8 @@ namespace Okane.Application;
 public interface IExpensesRepository
 {
     void Add(Expense expense);
-    IEnumerable<Expense> All();
+    IEnumerable<Expense> Search(string? categoryName = null);
     void Delete(int id);
     Expense? ById(int id);
+    Expense Update(int id, UpdateExpenseRequest request, Category category);
 }

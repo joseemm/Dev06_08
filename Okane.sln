@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okane.WebApi", "Okane.WebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okane.Domain", "Okane.Domain\Okane.Domain.csproj", "{AE21D8F3-645A-4FE1-B3B5-EAD9C0E3309A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okane.Storage.EntityFramework", "Okane.Storage.EntityFramework\Okane.Storage.EntityFramework.csproj", "{08761D1C-4E55-404C-8A70-944C886D5AA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{AE21D8F3-645A-4FE1-B3B5-EAD9C0E3309A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE21D8F3-645A-4FE1-B3B5-EAD9C0E3309A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE21D8F3-645A-4FE1-B3B5-EAD9C0E3309A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08761D1C-4E55-404C-8A70-944C886D5AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08761D1C-4E55-404C-8A70-944C886D5AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08761D1C-4E55-404C-8A70-944C886D5AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08761D1C-4E55-404C-8A70-944C886D5AA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
